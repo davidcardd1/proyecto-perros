@@ -1,5 +1,5 @@
 .bg-img {
-    background:  url("\primera.jpeg");
-    background-image:  url("primera.jpeg");
+    background:  url("\primera.jpg");
+    background-image:  url("primera.jpg");
     background-size: cover;
 }
