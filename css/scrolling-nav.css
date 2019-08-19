@@ -10,3 +10,9 @@ header {
 section {
   padding: 150px 0;
 }
+
+#logo{
+  align-self: center;
+  height: 25%;
+  width: 25%;
+}
