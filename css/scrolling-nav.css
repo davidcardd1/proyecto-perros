@@ -16,3 +16,11 @@ section {
   height: 25%;
   width: 25%;
 }
+
+#busqueda{
+  margin-bottom: 20px; 
+}
+
+#temas{
+  padding-top: 50px;
+}
