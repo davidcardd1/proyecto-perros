@@ -17,10 +17,21 @@ section {
   width: 25%;
 }
 
+.logoContacto{
+  width: 10%;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 #busqueda{
   margin-bottom: 20px; 
 }
 
 #temas{
   padding-top: 50px;
+}
+
+#logoForo{
+  width: 10%;
 }
