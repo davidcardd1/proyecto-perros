@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'Proyecto4Patas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'Proyecto4patas',
-        'USER': 'postgres',
-        'PASSWORD':'18ene11dani',
-        'HOST': 'localhost',
+        'NAME':'Proyecto4Patas1',
+        'USER': 'P4patas',
+        'PASSWORD':'proyecto4patas',
+        'HOST': 'proyecto4patas1.cuewlaccl1aj.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
