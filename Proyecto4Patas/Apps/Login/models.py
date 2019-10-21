@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class Usuario (models.Model):
     
-    user = AutoOneToOneField(settings.AUTH_USER_MODEL, related_name='forum_profile', verbose_name=_('User'))
-    profile_pic = ExtendedImageField(_('Profile pic'), blank=True, default='')
+    user = OneToOneField(settings.AUTH_USER_MODEL, related_name='forum_profile', verbose_name=_('User'))
+    profile_pic = ImageField(_('Profile pic'), blank=True, default='')
     post_count = models.IntegerField(_('Post count'), blank=True, default=0)
     email = models.EmailField()
     description=models.TextField( null=True,blank=True)
