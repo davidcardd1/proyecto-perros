@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from Proyecto4Patas.fields import AutoOneToOneField, ExtendedImageField, JSONField
 
 # Create your models here.
 class Usuario (models.Model):
