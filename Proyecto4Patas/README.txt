@@ -12,5 +12,5 @@ manage.py makemigrations
 manage.py migrate
 manage. runserver
 
-usuario : p4pMASTER
+usuario : SUbase
 contraseña ldd123
