@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Proyecto4Patas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'p4pDB',
+        'NAME':'p4pdb',
         'USER': 'p4pMASTER',
         'PASSWORD':'ldd12345',
         'HOST': 'p4pdb.cgczzwoavdpv.us-east-1.rds.amazonaws.com',
