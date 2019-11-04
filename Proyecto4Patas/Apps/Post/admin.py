@@ -1,6 +1,6 @@
 from django.contrib import admin
-from Apps.Post.models import Post,Comentario
+from Apps.Post.models import Post
 
 # Register your models here.
 admin.site.register(Post)
-admin.site.register(Comentario)
+#admin.site.register(Comentario)

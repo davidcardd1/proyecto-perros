@@ -13,5 +13,9 @@ urlpatterns = [
     #path('logout/',include('Apps.Login.urls') ),
     path('foro/',include('Apps.Post.urls') ),
     path('index/',index),
+<<<<<<< HEAD
 
 ]
+=======
+]
+>>>>>>> base1

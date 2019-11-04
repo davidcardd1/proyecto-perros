@@ -12,5 +12,5 @@ manage.py makemigrations
 manage.py migrate
 manage. runserver
 
-usuario : daniel
-contraseña 18ene11dani
+usuario : SUbase
+contraseña ldd123
