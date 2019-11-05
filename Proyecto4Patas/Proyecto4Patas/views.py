@@ -8,4 +8,4 @@ def index(request):
     return render(request,'index.html')
 
 def login_redirect(request):
-    return redirect('/login')
+    return redirect('/account')

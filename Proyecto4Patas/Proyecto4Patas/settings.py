@@ -131,9 +131,4 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-<<<<<<< HEAD
 LOGIN_REDIRECT_URL = '/foro/'
-
-=======
-LOGIN_REDIRECT_URL = '/foro/'
->>>>>>> base1
