@@ -10,7 +10,7 @@ class Usuario (models.Model):
     post_count = models.IntegerField('Post count', blank=True, default=0)
     bio = models.TextField(max_length=2500, null=True,blank=True, default='')
     
-    def create_profile(sender, **kwargs):
+def create_profile(sender, **kwargs):
     if kwargs['created']:
         user_profile = Usuario.objects.create(user=kwargs['instance'])
 
