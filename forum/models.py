@@ -1,11 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
+from django.db.models.signals import post_save
+
 
 class Usuario (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     profile_pic = models.ImageField('Profile pic', blank=True, default='')
     post_count = models.IntegerField('Post count', blank=True, default=0)
     bio = models.TextField(max_length=2500, null=True,blank=True, default='')
+    
+    def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = Usuario.objects.create(user=kwargs['instance'])
+
+post_save.connect(create_profile, sender=User) 
 
 class Topic(models.Model):
     name = models.CharField('Subject', max_length=50, unique=True)
