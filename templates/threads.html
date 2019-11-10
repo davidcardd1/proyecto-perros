@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <title>{{ topic.name }} - Threads</title>
+{% endblock %}
+
+{% block body %}
+<section>
+  <div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
+        <li class="breadcrumb-item active">{{ topic.name }}</li>
+      </ol>
+      <a href="{% url 'new_thread' topic.pk %}" class="btn btn-primary">Crear nuevo thread</a>
+  </div>
+  <table class="table container table-bordered table-hover">
+    <thead class="thead-inverse thead-dark">
+      <tr>
+        <th th scope="col" width="40%">Topic</th>
+        <th scope="col" width="15%">Starter</th>
+        <th scope="col" width="15%">Replies</th>
+        <th scope="col" width="15%">Views</th>
+        <th scope="col" width="15%">Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for thread in topic.threads.all %}
+        <tr>
+          <td>{{ thread.name }}</td>
+          <td>{{ thread.user.name }}</td>
+          <td>0</td>
+          <td>0</td>
+          <td>{{ thread.updated }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock body %}
