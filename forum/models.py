@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import post_save
+from django.contrib.auth.models import User
 
-
+#user
 class Usuario (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     profile_pic = models.ImageField('Profile pic', blank=True, default='')
@@ -16,6 +16,7 @@ def create_profile(sender, **kwargs):
 
 post_save.connect(create_profile, sender=User) 
 
+#forum
 class Topic(models.Model):
     name = models.CharField('Subject', max_length=50, unique=True)
     description = models.CharField(max_length=150)
@@ -45,7 +46,7 @@ class Thread(models.Model):
 
 class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, null=False, default='0', related_name='posts')
-    user = models.ForeignKey(Usuario, on_delete=models.CASCADE,  related_name='posts')
+    user = models.ForeignKey(Usuario, on_delete=models.CASCADE,  related_name='+', null=True)
     created = models.DateTimeField('Created', auto_now_add=True)
     updated = models.DateTimeField('Updated', auto_now=True)
     body = models.TextField('Message')

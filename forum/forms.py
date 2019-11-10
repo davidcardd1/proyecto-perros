@@ -2,8 +2,14 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Usuario
+from .models import Usuario, Topic, Thread, Post
 
+class SignUpForm(UserCreationForm):
+    email = forms.CharField(max_length=254, required=True, widget=forms.EmailInput())
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+        
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -28,3 +34,17 @@ class RegistrationForm(UserCreationForm):
             user.save()
 
         return user
+
+class NewThreadForm(forms.ModelForm):
+    body = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 5, 'placeholder': 'Escribe el contenido'}
+        ), 
+        max_length=5000,
+        help_text='Máximo 5000 caracteres'
+        )
+
+    class Meta:
+        model = Thread
+        fields = ['name', 'body']
+
