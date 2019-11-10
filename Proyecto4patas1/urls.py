@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path
 
 from forum import views
-from forum.views import register, profile
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -25,9 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home', views.home, name='home'),
     path('foro', views.foro, name='foro'),
+    path('foro/<int:pk>/threads', views.topic_threads, name='topic_threads'),
+    path('foro/<int:pk>/threads/new', views.new_thread, name='new_thread'),
     #users
     path('account/login/', LoginView.as_view(template_name='login.html'), name="login"),
     path('account/logout/', LogoutView.as_view(template_name='logout.html'), name="logout"),
-    path('account/register/', register, name="register"),
-    path('account/profile/', profile, name="profile")
+    path('account/register/', views.register, name="register"),
+    path('account/profile/', views.profile, name="profile")
 ]
