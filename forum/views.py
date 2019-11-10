@@ -4,13 +4,23 @@ from .models import Topic
 from django.contrib.auth.models import User
 from .forms import RegistrationForm
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 def home(request):
     return render(request, 'index.html')
 
 def foro(request):
+    queryset =request.GET.get("buscar") 
     topics = Topic.objects.all()
-    return render(request, 'foro.html', {'topics': topics})
+    if queryset:
+        topics = Topic.objects.filter(
+            Q(name__icontains = queryset) |
+            Q(description__icontains = queryset)
+        ).distinct()
+        return render(request, 'foro.html', {'topics': topics})
+    else:
+        return render(request, 'foro.html', {'topics': topics})
+
 
 def register(request):
     if request.method =='POST':
