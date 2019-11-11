@@ -27,7 +27,7 @@
       {% for thread in topic.threads.all %}
         <tr>
           <td>{{ thread.name }}</td>
-          <td>{{ thread.user.name }}</td>
+          <td>{{ thread.user.user.username }}</td>
           <td>0</td>
           <td>0</td>
           <td>{{ thread.updated }}</td>
