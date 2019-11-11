@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .models import Topic
+from .forms import RegistrationForm, EditProfileForm
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib.auth.models import User
-from .forms import RegistrationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 from django.db.models import Q
+
 
 def home(request):
     return render(request, 'index.html')
@@ -42,3 +44,15 @@ def profile(request, pk=None):
         user = request.user
     args = {'user': user}
     return render(request, 'profile.html', args)
+
+def editProfile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'edit_profile.html', args)

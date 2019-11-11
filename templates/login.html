@@ -1,25 +1,7 @@
-{% extends 'base.html' %}
-
-{% block head %}
-  <title>Login</title>
-{% endblock %}
-
-{% block body %}
-<section>
-  <div class="container" id="modalLogin">
-    <div class="row">
-
-      <div class="col px-5">
-        <h1>Ingresa a tu cuenta</h1><br>
-        <form method="POST">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-primary">Entrar</button>
-        </form>
-        <p><a href="/register">Crear cuenta</a></p>
-      </div>
-
-    </div>
-  </div>
-</section>
-{% endblock %}
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Entrar</button>
+  </form>
+</div>

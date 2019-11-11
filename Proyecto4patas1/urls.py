@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from forum import views
-from forum.views import register, profile
+from forum.views import register, profile,editProfile
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -28,5 +28,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='login.html'), name="login"),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name="logout"),
     path('register/', register, name="register"),
-    path('profile/', profile, name="profile")
+    path('profile/', profile, name="profile"),
+    path('profile/edit', editProfile, name="editProfile"),
+    path('profile/changePassword', changePassword, name="changePassword")
 ]
