@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 
 class Usuario (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    profile_pic = models.ImageField('Profile pic', blank=True, default='')
+    profile_pic = models.ImageField(upload_to='profile_image', blank=True, default='')
     post_count = models.IntegerField('Post count', blank=True, default=0)
     bio = models.TextField(max_length=2500, null=True,blank=True, default='')
     

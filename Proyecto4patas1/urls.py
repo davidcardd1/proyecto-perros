@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from forum import views
-from forum.views import register, profile,editProfile
+from forum.views import register, profile,editProfile, changePassword
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
