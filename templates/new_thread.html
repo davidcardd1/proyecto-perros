@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <title>{{ topic.name }} - New thread</title>
+{% endblock %}
+
+{% block body %}
+<section>
+  <div class="container">
+        <ol class="breadcrumb my-4">
+            <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'topic_threads' topic.pk %}">{{ topic.name }}</a></li>
+            <li class="breadcrumb-item active">New thread</li>
+        </ol>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form.html' %}
+            <button type="submit" class="btn btn-success">Post</button>
+        </form>
+    </div>
+</section>
+{% endblock body %}

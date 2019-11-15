@@ -1,14 +1,17 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import post_save
+from django.contrib.auth.models import User
 
-
+#user
 class Usuario (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     profile_pic = models.ImageField(upload_to='profile_image', blank=True, default='')
     post_count = models.IntegerField('Post count', blank=True, default=0)
     bio = models.TextField(max_length=2500, null=True,blank=True, default='')
+    
+    def __str__(self):
+        return self.user.username
     
 def create_profile(sender, **kwargs):
     if kwargs['created']:
@@ -16,6 +19,7 @@ def create_profile(sender, **kwargs):
 
 post_save.connect(create_profile, sender=User) 
 
+#forum
 class Topic(models.Model):
     name = models.CharField('Subject', max_length=50, unique=True)
     description = models.CharField(max_length=150)
@@ -45,7 +49,7 @@ class Thread(models.Model):
 
 class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, null=False, default='0', related_name='posts')
-    user = models.ForeignKey(Usuario, on_delete=models.CASCADE,  related_name='posts')
+    user = models.ForeignKey(Usuario, on_delete=models.CASCADE,  related_name='+', null=True)
     created = models.DateTimeField('Created', auto_now_add=True)
     updated = models.DateTimeField('Updated', auto_now=True)
     body = models.TextField('Message')

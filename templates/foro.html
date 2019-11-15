@@ -35,7 +35,7 @@
           <li class="nav-item nav-link active"> {{ user }} </li>
           <li class="nav-item">
               <!--<a class="nav-link js-scroll-trigger" href="/login">Ingresar</a>-->
-              <a href="login.html" class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#loginModal">Ingresar</a>
+              <a href="login.html" class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#loginModal" id="loginLink">Ingresar</a>
             </li>
           <li class="nav-item">
             <!--<a class="nav-link js-scroll-trigger" href="/register">Registrarse</a>-->
@@ -50,34 +50,34 @@
     <div class="container text-center">
       <img src="{% static 'img/logos5.png' %}" id="logoForo"/>
       <h1>Adoptar es salvar</h1> 
+      <h2>FORO</h2> 
     </div>
   </header>
 
   <section id="temas">
-   <form method="GET">
     <div class="container" id="busqueda">
-      <input class="form-control" type="text" placeholder="Buscar topic" name="buscar">
-      <button type="submit" class="boton btn-success"> Buscar </button>  
+      <input class="form-control" type="text" placeholder="Buscar tema" readonly>
     </div>
-  </form>
+
     <div class="container">
       <table class="table table-bordered table-hover">
         <thead class="thead-dark">
           <tr>
             <th scope="col" width="50%">Nombre</th>
             <th scope="col" width="15%">Estadisticas</th>
-            <th scope="col" width="35%">Ultimo mensaje</th>
+            <th scope="col" width="35%">Último post</th>
          </tr>
         </thead>
         <tbody>
             {% for topic in topics %}
           <tr>
             <td>
-                {{ topic.name }} <br>
+              <a href="{% url 'topic_threads' topic.pk %}">{{ topic.name }}</a>
+              <small class="text-muted d-block">{{ topic.description }}</small>
             </td>
-            <td>Temas: 0<br>Mensajes: 0
+            <td>Hilos: 0<br>Posts: 0
             </td>
-            <td>No hay mensajes</td>
+            <td>No hay posts</td>
             {% endfor %}
           </tr>
         </tbody>
@@ -85,7 +85,7 @@
     </div>
   </section>
 
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -117,7 +117,7 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div> 
   
 
   <!-- Footer -->
@@ -139,6 +139,9 @@
   <!-- Custom JavaScript for this theme -->
   <script src="{% static 'js/scrolling-nav.js' %}"></script>
   <script src="{% static 'js/foro.js' %}"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   </body>
 
 </html>
