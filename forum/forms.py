@@ -35,8 +35,6 @@ class RegistrationForm(UserCreationForm):
         return user
 
 class EditProfileForm(UserChangeForm):
-    template_name='/something/else'
-    
     class Meta:
         model = User
         fields = (
@@ -44,6 +42,12 @@ class EditProfileForm(UserChangeForm):
             'first_name',
             'last_name'
         )
+
+class ProfileForm(UserChangeForm):
+    class Meta:
+        model = Usuario
+        fields = ('bio', 'profile_pic') 
+
 class NewThreadForm(forms.ModelForm):
     body = forms.CharField(
         widget=forms.Textarea(

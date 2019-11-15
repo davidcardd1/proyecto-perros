@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Topic, Thread, Usuario, Post
-from .forms import RegistrationForm, EditProfileForm, NewThreadForm, SignUpForm
+from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm, SignUpForm
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login as auth_login
 
@@ -82,13 +82,21 @@ def profile(request, pk=None):
 def editProfile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
-
-        if form.is_valid():
-            form.save()
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        
+        if form.is_valid() and profile_form.is_valid():
+            #form.save()
+            user_form = form.save()
+            custom_form = profile_form.save(False)
+            custom_form.user = user_form
+            custom_form.save()
             return redirect('/profile')
     else:
         form = EditProfileForm(instance=request.user)
-        args = {'form': form}
+        profile_form = ProfileForm(instance=request.user.profile)
+        args = {}
+        args['form'] = form
+        args['profile_form'] = profile_form
         return render(request, 'edit_profile.html', args)
 
 def changePassword(request):
