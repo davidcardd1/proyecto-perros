@@ -60,14 +60,14 @@
           <tr>
             <th scope="col" width="50%">Nombre</th>
             <th scope="col" width="15%">Estadisticas</th>
-            <th scope="col" width="35%">Último post</th>
+            <th scope="col" width="35%">Última modificación</th>
          </tr>
         </thead>
         <tbody>
             {% for topic in topics %}
           <tr>
             <td>
-              <a href="{% url 'topic_threads' topic.pk %}">{{ topic.name }}</a>
+              <a href="{% url 'topic_threads' topic.name %}">{{ topic.name }}</a>
               <small class="text-muted d-block">{{ topic.description }}</small>
             </td>
             <td>Hilos: 0<br>Posts: 0

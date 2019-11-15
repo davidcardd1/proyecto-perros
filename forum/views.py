@@ -17,12 +17,12 @@ def foro(request):
     }
     return render(request, 'foro.html', context)
     
-def topic_threads(request, pk):
-    topic = get_object_or_404(Topic, pk=pk)
+def topic_threads(request, n):
+    topic = get_object_or_404(Topic, name=n)
     return render(request, 'threads.html', {'topic': topic})
 
-def new_thread(request, pk):
-    topic = get_object_or_404(Topic, pk=pk)
+def new_thread(request, n):
+    topic = get_object_or_404(Topic, name=n)
     user = Usuario.objects.first()  #cambiar por usuario logeado
 
     if request.method == 'POST':
@@ -37,10 +37,14 @@ def new_thread(request, pk):
                 thread=thread,
                 user=user
             )
-            return redirect('topic_threads', pk=topic.pk)
+            return redirect('topic_threads', n=topic.name)
     else:
         form = NewThreadForm() 
     return render(request, 'new_thread.html', {'topic': topic, 'form': form})
+
+def thread_posts(request, nTo, nTh):
+    thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
+    return render(request, 'posts.html', {'thread': thread})
 
 #account
 def register(request):

@@ -11,7 +11,9 @@
         <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
         <li class="breadcrumb-item active">{{ topic.name }}</li>
       </ol>
-      <a href="{% url 'new_thread' topic.pk %}" class="btn btn-primary">Crear nuevo thread</a>
+  </div>
+  <div class='container'>
+      <a href="{% url 'new_thread' topic.name %}" class="btn btn-primary">Crear nuevo thread</a>
   </div>
   <table class="table container table-bordered table-hover">
     <thead class="thead-inverse thead-dark">
@@ -26,7 +28,7 @@
     <tbody>
       {% for thread in topic.threads.all %}
         <tr>
-          <td>{{ thread.name }}</td>
+          <td><a href="{% url 'thread_posts' topic.name thread.name %}">{{ thread.name }}</a></td>
           <td>{{ thread.user.user.username }}</td>
           <td>0</td>
           <td>0</td>

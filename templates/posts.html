@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}{{ thread.name }}{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+        <ol class="breadcrumb my-4">
+            <li class="breadcrumb-item"><a href="{% url 'foro' %}">Boards</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'topic_threads' thread.topic.name %}">{{ thread.topic.name }}</a></li>
+            <li class="breadcrumb-item active">{{ thread.name }}</li>
+        </ol>
+    </div>
+    {% for post in thread.posts.all %}
+    <div class="card mb-2 container">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-2">
+            <img src="{% static 'img/logo.jpg' %}" alt="{{ post.user.user.name }}" class="w-100">
+            <small>No. de posts: {{ post.user.posts.post_count}}</small>
+          </div>
+          <div class="col-10">
+            <div class="row mb-3">
+              <div class="col-6">
+                <strong class="text-muted">{{ post.user.user.username }}</strong>
+              </div>
+              <div class="col-6 text-right">
+                <small class="text-muted">{{ post.created }}</small>
+              </div>
+            </div>
+            {{ post.body }}
+            {% if post.user == user %}
+              <div class="mt-3">
+                <a href="#" class="btn btn-primary btn-sm" role="button">Editar</a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="mb-4 text-right">
+                <a href="#" class="btn btn-primary" role="button">Responder al post</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
