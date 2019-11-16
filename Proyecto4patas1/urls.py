@@ -27,6 +27,7 @@ urlpatterns = [
     path('foro/<str:n>', views.topic_threads, name='topic_threads'),
     path('foro/<str:n>/new_thread', views.new_thread, name='new_thread'),
     path('foro/<str:nTo>/<str:nTh>', views.thread_posts, name='thread_posts'),
+    path('foro/<str:nTo>/<str:nTh>/new_post', views.new_post, name='new_post'),
     #users
     path('account/login/', LoginView.as_view(template_name='login.html'), name="login"),
     path('account/logout/', LogoutView.as_view(template_name='logout.html'), name="logout"),

@@ -48,3 +48,8 @@ class NewThreadForm(forms.ModelForm):
         model = Thread
         fields = ['name', 'body']
 
+class NewPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['body', ]
+

@@ -8,10 +8,23 @@
 <section>
     <div class="container">
         <ol class="breadcrumb my-4">
-            <li class="breadcrumb-item"><a href="{% url 'foro' %}">Boards</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
             <li class="breadcrumb-item"><a href="{% url 'topic_threads' thread.topic.name %}">{{ thread.topic.name }}</a></li>
             <li class="breadcrumb-item active">{{ thread.name }}</li>
         </ol>
+    </div>
+    <div class="container mr-10 mb-3 text-right ">
+      <a href="{% url 'new_post' thread.topic.name thread.name %}" class="btn btn-primary" role="button">Responder al post</a>
+    </div>
+    <div class="card  bg-ligth border-ligth container mb-4">
+      <div class="card-header">
+          <strong class="text-muted">{{ thread.user.user.username }}</strong>
+          <small class="text-muted text-right">{{ thread.created }}</small>
+          <h3>{{ thread.name }}</h3>
+      </div>
+      <div class="card-body">
+          <a>{{ thread.body }}</a>
+      </div>
     </div>
     {% for post in thread.posts.all %}
     <div class="card mb-2 container">
@@ -37,9 +50,6 @@
               </div>
             {% endif %}
           </div>
-        </div>
-        <div class="mb-4 text-right">
-                <a href="#" class="btn btn-primary" role="button">Responder al post</a>
         </div>
       </div>
     </div>

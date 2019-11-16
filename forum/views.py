@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Topic, Thread, Usuario, Post
 from django.contrib.auth.models import User
-from .forms import RegistrationForm, NewThreadForm, SignUpForm
+from .forms import RegistrationForm, NewThreadForm, SignUpForm, NewPostForm
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login as auth_login
 
@@ -41,6 +41,22 @@ def new_thread(request, n):
     else:
         form = NewThreadForm() 
     return render(request, 'new_thread.html', {'topic': topic, 'form': form})
+
+def new_post(request, nTo, nTh):
+    thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
+    user = Usuario.objects.first()  #cambiar por usuario logeado
+
+    if request.method == 'POST':
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.thread = thread
+            post.user = user
+            post.save()
+            return redirect('thread_posts', nTo=thread.topic.name, nTh=thread.name)
+    else:
+        form = NewPostForm() 
+    return render(request, 'new_post.html', {'thread': thread, 'form': form})
 
 def thread_posts(request, nTo, nTh):
     thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
