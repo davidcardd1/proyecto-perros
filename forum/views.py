@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .forms import RegistrationForm, NewThreadForm, SignUpForm, NewPostForm
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login as auth_login
+from django.db.models import Q
 
 
 #forum
@@ -12,10 +13,19 @@ def home(request):
     return render(request, 'index.html')
 
 def foro(request):
-    context = {
-        'topics' : Topic.objects.all()
-    }
-    return render(request, 'foro.html', context)
+    queryset =request.GET.get("buscar") 
+    #print(queryset)
+    topics = Topic.objects.all()
+    if queryset:
+        topics = Topic.objects.filter(
+            Q(name__icontains = queryset) |
+            Q(description__icontains = queryset)
+        ).distinct()
+        
+        return render(request, 'foro.html', {'topics': topics})
+
+    else:
+        return render(request, 'foro.html', {'topics': topics})
     
 def topic_threads(request, n):
     topic = get_object_or_404(Topic, name=n)

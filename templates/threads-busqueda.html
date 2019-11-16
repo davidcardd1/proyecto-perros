@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <title>{{ topic.name }} - Threads</title>
+{% endblock %}
+
+{% block body %}
+<section>
+ <form method="GET">
+
+    <div class="container" id="busqueda">
+      <input class="form-control" type="text" placeholder="Buscar topic" name="buscar">
+      <button type="submit" class="boton btn-success"> Buscar </button>  
+    </div>
+  </form>
+  <table class="table container table-bordered table-hover">
+    <thead class="thead-inverse thead-dark">
+      <tr>
+        <th th scope="col" width="40%">Topic</th>
+        <th scope="col" width="15%">Starter</th>
+        <th scope="col" width="15%">Replies</th>
+        <th scope="col" width="15%">Views</th>
+        <th scope="col" width="15%">Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for thread in topic %}
+        <tr>
+          <td>{{ thread.name }}</td>
+          <td>{{ thread.user.user.username }}</td>
+          <td>0</td>
+          <td>0</td>
+          <td>{{ thread.updated }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock body %}
