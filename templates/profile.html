@@ -14,8 +14,9 @@
         <p>Email: {{ user.email }}</p>
         <p>Description: {{ user.profile.bio }}</p>
         <p>Post count: {{ user.profile.post_count }}</p>
+        {% if user.profile.profile_pic %}
         <p>Image: </p> <img src="{{ user.profile.profile_pic.url }}" width="240">
-
+        {% endif %}
   </div>
 </section>
 {% endblock %}

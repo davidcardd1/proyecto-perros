@@ -1,14 +1,13 @@
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm, AuthenticationForm
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Topic, Thread, Usuario, Post
-from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm, SignUpForm
+from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm
 from django.views.generic import ListView, DetailView
-from django.contrib.auth import login as auth_login
-
+from django.contrib.auth import login,authenticate
 
 #forum
 def home(request):
@@ -48,28 +47,38 @@ def new_thread(request, pk):
 #account
 def register(request):
     if request.method =='POST':
-        print("Aqui estoy")
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            msg='You have successfully Registered'
-            return render(request,'login.html',{'msg':msg})
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('foro')
     else:
         form = RegistrationForm()
     
     args = {'form':form}
     return render(request, 'reg_form.html', args)
 
-def signup(request):
-    if request.method =='POST':
-        form = SignUpForm(request.POST)
+def login_view(request,*args, **kwargs):
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
-            user = form.save()
-            auth_login(request, user)
-            return redirect('home')
-    else:
-        form = SignUpForm()
-    return render(request, 'login.html', {'form': form})
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('foro')
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request = request,
+                    template_name = "login.html",
+                    context={"form":form})
 
 def profile(request, pk=None):
     if pk:
@@ -83,21 +92,26 @@ def editProfile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        password_form = PasswordChangeForm(data=request.POST, user=request.user)
         
-        if form.is_valid() and profile_form.is_valid():
-            #form.save()
+        if form.is_valid() and profile_form.is_valid() and password_form.is_valid():
+            password_form.save()
             user_form = form.save()
             custom_form = profile_form.save(False)
             custom_form.user = user_form
             custom_form.save()
+            update_session_auth_hash(request, password_form.user)
             return redirect('/profile')
     else:
         form = EditProfileForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
+        password_form = PasswordChangeForm(user=request.user)
         args = {}
         args['form'] = form
         args['profile_form'] = profile_form
+        args['password_form'] = password_form
         return render(request, 'edit_profile.html', args)
+    return render(request, 'profile.html', args)
 
 def changePassword(request):
     if request.method == 'POST':

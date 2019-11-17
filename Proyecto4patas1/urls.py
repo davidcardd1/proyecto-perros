@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from forum import views
-from forum.views import register, profile,editProfile, changePassword
+#from forum.views import register, profile,editProfile, changePassword
 from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
@@ -29,11 +29,10 @@ urlpatterns = [
     path('foro/<int:pk>/threads', views.topic_threads, name='topic_threads'),
     path('foro/<int:pk>/threads/new', views.new_thread, name='new_thread'),
     #users
-    path('login/', LoginView.as_view(template_name='login.html'), name="login"),
-    path('logout/', LogoutView.as_view(template_name='logout.html'), name="logout"),
-    path('register/', register, name="register"),
-    path('profile/', profile, name="profile"),
-    path(r'profile/(?P<pk>\d+)/$', profile, name='view_profile_with_pk'),
-    path('profile/edit', editProfile, name="editProfile"),
-    path('profile/changePassword', changePassword, name="changePassword")
+    path('login/', views.login_view, name='login'),
+    path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('register/', views.register, name='register'),
+    path('profile/', views.profile, name="profile"),
+    path('profile/edit', views.editProfile, name='editProfile'),
+    path('profile/changePassword', views.changePassword, name='changePassword')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
