@@ -28,8 +28,34 @@ def foro(request):
         return render(request, 'foro.html', {'topics': topics})
     
 def topic_threads(request, n):
+
     topic = get_object_or_404(Topic, name=n)
-    return render(request, 'threads.html', {'topic': topic})
+    tema =get_object_or_404(Topic, name=n)
+    pk = tema.pk
+    print(tema.pk)
+    print(tema.name)
+    threads1 =  Thread.objects.filter(topic = pk)
+    for Thread1 in threads1:
+     print(Thread1.name)
+    context = {
+        'topic' : get_object_or_404(Topic, name=n),
+        'threads' : Thread.objects.filter(topic = pk),
+    }
+    queryset =request.GET.get("buscar") 
+    print(queryset)
+    if queryset:
+        threads1=Thread.objects.filter(
+         Q(name__icontains = queryset) &
+          Q(topic = pk)
+         )
+        context = {
+        'topic' : get_object_or_404(Topic, name=n),
+        'threads' : threads1,
+        }
+        return render(request, 'threads.html',context)
+    else:
+        
+        return render(request, 'threads.html',context)
 
 def new_thread(request, n):
     topic = get_object_or_404(Topic, name=n)
