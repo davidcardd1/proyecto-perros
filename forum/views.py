@@ -112,24 +112,19 @@ def editProfile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        password_form = PasswordChangeForm(data=request.POST, user=request.user)
-        
-        if form.is_valid() and profile_form.is_valid() and password_form.is_valid():
-            password_form.save()
+
+        if form.is_valid() and profile_form.is_valid():
             user_form = form.save()
             custom_form = profile_form.save(False)
             custom_form.user = user_form
             custom_form.save()
-            update_session_auth_hash(request, password_form.user)
             return redirect('/profile')
     else:
         form = EditProfileForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-        password_form = PasswordChangeForm(user=request.user)
         args = {}
         args['form'] = form
         args['profile_form'] = profile_form
-        args['password_form'] = password_form
         return render(request, 'edit_profile.html', args)
     return render(request, 'profile.html', args)
 
