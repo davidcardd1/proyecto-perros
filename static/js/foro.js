@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     $("#loginLink").click(function(){
         alert("Hola");
         // $("#includedLogin").load('views.login');
@@ -8,4 +8,4 @@ $(document).ready(function(){
         alert("Hola");
         $("#includedRegister").load('register');
     });
-});
+});*/

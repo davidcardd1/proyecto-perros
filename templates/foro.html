@@ -108,10 +108,20 @@
           </button>
         </div>
         <div class="modal-body" id="includedLogin">
-          
+          <div class="container" id="viewLogin">
+            <form method="POST">
+              {% csrf_token %}
+              <p><label for="id_username">User:</label><input id="id_username" type="text" name="username" maxlength="100" required></p>
+              <p><label for="id_password">Password: </label><input id="id_password" type="password" name="password" maxlength="100" required></p>
+              {% for error in field.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+              <button type="submit" class="btn btn-primary">Entrar</button>
+            </form>
+          </div>
         </div>
         <div class="modal-footer">
-          ¿Aun no tienes cuenta? <a href="/registerModal">Registrate</a>
+          ¿Aun no tienes cuenta? <a href="" data-toggle="modal" data-target="#registerModal" id="registerLink" data-dismiss="modal">Registrate</a>
         </div>
       </div>
     </div>
@@ -127,10 +137,27 @@
           </button>
         </div>
         <div class="modal-body" id="includedRegister">
-          
+          <div class="container">
+            <form method="POST">
+              {% csrf_token %}
+              {% for non_field_error in register_form.non_field_errors %}
+                <p class="help is-danger">{{ non_field_error }}</p>
+              {% endfor %}
+              {% for field in register_form %}
+                <div class="field">
+                <label for="{{ field.id_for_label }}" class="label">{{ field.html_name }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                  <p class="help is-danger">{{ error }}</p>
+                {% endfor %}
+                </div>
+              {% endfor %}
+              <button type="submit" class="btn btn-primary">Registrarse</button>
+            </form>
+          </div>
         </div>
         <div class="modal-footer">
-          ¿Ya tienes una cuenta? <a href="#loginModal">Ingresa</a>
+          ¿Ya tienes una cuenta? <a href=""  data-toggle="modal" data-target="#loginModal" id="loginLink" data-dismiss="modal">Ingresa</a>
         </div>
       </div>
     </div>

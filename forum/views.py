@@ -14,8 +14,32 @@ def home(request):
     return render(request, 'index.html')
 
 def foro(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        register_form = RegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('foro')
+
+            register_form.save()
+            username1 = register_form.cleaned_data.get('username')
+            password1 = register_form.cleaned_data.get('password1')
+            user1 = authenticate(username=username1, password=password1)
+            if user1 is not None:
+                login(request, user1)
+                return redirect('foro')
+
+    form = AuthenticationForm()
+    register_form = RegistrationForm()
+
     context = {
-        'topics' : Topic.objects.all()
+        'topics' : Topic.objects.all(),
+        'form' : form,
+        'register_form' : register_form
     }
     return render(request, 'foro.html', context)
     
@@ -71,10 +95,6 @@ def login_view(request,*args, **kwargs):
             if user is not None:
                 login(request, user)
                 return redirect('foro')
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request = request,
                     template_name = "login.html",
