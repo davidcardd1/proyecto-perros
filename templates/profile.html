@@ -1,22 +1,29 @@
 {%  extends 'base.html' %}
 {% block head %}
-<title>Perfil</title>
+  <title>Perfil</title>
 {% endblock %}
 
 {% block body %}
 <section>
   <div class="container">
-
-        <h1>Perfil</h1><br>
-        <p>Username: {{ user }}</p>
-        <p>First name: {{ user.first_name }}</p>
-        <p>Last name: {{ user.last_name }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Description: {{ user.profile.bio }}</p>
-        <p>Post count: {{ user.profile.post_count }}</p>
-        {% if user.profile.profile_pic %}
-        <p>Image: </p> <img src="{{ user.profile.profile_pic.url }}" width="240">
-        {% endif %}
+    <div class="row">
+        <div class="col">
+          <p>Image<br>
+          {% if user.profile.profile_pic %}
+          <img src="{{ user.profile.profile_pic.url }}" width="170px">
+          {% else %}
+          <img src="/Proyecto4patas1/media/profile_image/default_profileImage.jpg" width="170px">
+          {% endif %}
+          </p>
+          <p>Bio<br>{{ user.profile.bio }}</p>
+        </div>
+        <div class="col">
+          <p>Username<br>{{ user }}</p>
+          <p>First name<br>{{ user.first_name }}</p>
+          <p>Last name<br>{{ user.last_name }}</p>
+          <p>Email<br>{{ user.email }}</p>  
+        </div>
+    </div>
   </div>
 </section>
 {% endblock %}
