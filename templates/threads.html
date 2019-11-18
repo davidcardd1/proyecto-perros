@@ -9,14 +9,14 @@
   <div class="container">
       <ol class="breadcrumb my-4">
         <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
-        <li class="breadcrumb-item active">{{ Tema.name }}</li>
+        <li class="breadcrumb-item active">{{ topic.name }}</li>
       </ol>
   </div>
 
    <form method="GET">
     <div class="container" id="busqueda">
       <input class="form-control" type="text" placeholder="Buscar topic" name="buscar">
-      <button type="submit" class="boton btn-success"> Buscar </button>  
+      <button type="submit" class="btn btn-success"> Buscar </button>  
     </div>
   </form>
   
