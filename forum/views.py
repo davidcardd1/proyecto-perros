@@ -95,7 +95,7 @@ def new_thread(request, n):
             post = Post.objects.create(
                 body=form.cleaned_data.get('body'),
                 thread=thread,
-                user=user
+                user=thread.user
             )
             return redirect('topic_threads', n=topic.name)
     else:
