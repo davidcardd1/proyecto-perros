@@ -11,8 +11,18 @@
         <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
         <li class="breadcrumb-item active">{{ topic.name }}</li>
       </ol>
-      <a href="{% url 'new_thread' topic.pk %}" class="btn btn-primary">Crear nuevo thread</a>
   </div>
+
+   <form method="GET">
+    <div class="container" id="busqueda">
+      <input class="form-control" type="text" placeholder="Buscar topic" name="buscar">
+      <button type="submit" class="btn btn-success"> Buscar </button>  
+    </div>
+  </form>
+  
+
+  <div class='container'>
+     </div>
   <table class="table container table-bordered table-hover">
     <thead class="thead-inverse thead-dark">
       <tr>
@@ -24,10 +34,11 @@
       </tr>
     </thead>
     <tbody>
-      {% for thread in topic.threads.all %}
+  
+      {% for thread in threads %}
         <tr>
-          <td>{{ thread.name }}</td>
-          <td>{{ thread.user.user.username }}</td>
+          <td><a href="{% url 'thread_posts' topic.name thread.name %}">{{ thread.name }}</a></td>
+          <td>{{ thread.username }}</td>
           <td>0</td>
           <td>0</td>
           <td>{{ thread.updated }}</td>

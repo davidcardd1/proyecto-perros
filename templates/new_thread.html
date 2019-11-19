@@ -9,7 +9,7 @@
   <div class="container">
         <ol class="breadcrumb my-4">
             <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'topic_threads' topic.pk %}">{{ topic.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'topic_threads' topic.name %}">{{ topic.name }}</a></li>
             <li class="breadcrumb-item active">New thread</li>
         </ol>
         <form method="post" novalidate>
