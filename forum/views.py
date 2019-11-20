@@ -83,7 +83,7 @@ def topic_threads(request, n):
 @login_required
 def new_thread(request, n):
     topic = get_object_or_404(Topic, name=n)
-    user = Usuario.objects.first()  #cambiar por usuario logeado
+    user = Usuario.objects.first() #cambiar por usuario logeado
 
     if request.method == 'POST':
         form = NewThreadForm(request.POST)
