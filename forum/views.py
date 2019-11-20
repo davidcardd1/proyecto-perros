@@ -8,7 +8,7 @@ from .models import Topic, Thread, Usuario, Post
 from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm,  NewThreadForm, SignUpForm, NewPostForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate, update_session_auth_hash
 
 #forum
 def home(request):
