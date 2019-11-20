@@ -83,14 +83,14 @@ def topic_threads(request, n):
 @login_required
 def new_thread(request, n):
     topic = get_object_or_404(Topic, name=n)
-    #user = Usuario.objects.first()  #cambiar por usuario logeado
+    user = Usuario.objects.first()  #cambiar por usuario logeado
 
     if request.method == 'POST':
         form = NewThreadForm(request.POST)
         if form.is_valid():
             thread = form.save(commit=False)
             thread.topic = topic
-            thread.user = request.user
+            thread.user = user
             thread.save()
             post = Post.objects.create(
                 body=form.cleaned_data.get('body'),
@@ -105,14 +105,14 @@ def new_thread(request, n):
 @login_required
 def new_post(request, nTo, nTh):
     thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
-    #user = Usuario.objects.first()  #cambiar por usuario logeado
+    user = Usuario.objects.first() #cambiar por usuario logeado 
 
     if request.method == 'POST':
         form = NewPostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.thread = thread
-            post.user = request.user
+            post.user = user
             post.save()
             return redirect('thread_posts', nTo=thread.topic.name, nTh=thread.name)
     else:
