@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm, Authen
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Topic, Thread, Usuario, Post
-from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm,  NewThreadForm, SignUpForm, NewPostForm
+from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm,  NewThreadForm, NewPostForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login,authenticate, update_session_auth_hash
