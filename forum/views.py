@@ -5,9 +5,10 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm, Authen
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Topic, Thread, Usuario, Post
-from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm
+from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm,  NewThreadForm, NewPostForm
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate, update_session_auth_hash
 
 #forum
 def home(request):
@@ -35,38 +36,92 @@ def foro(request):
 
     form = AuthenticationForm()
     register_form = RegistrationForm()
+    queryset =request.GET.get("buscar") 
+    #print(queryset)
+    topics = Topic.objects.all()
+    if queryset:
+        topics = Topic.objects.filter(
+            Q(name__icontains = queryset) |
+            Q(description__icontains = queryset)
+        ).distinct()
+        
+        return render(request, 'foro.html', {'topics': topics, 'form': form, 'register_form': register_form})
 
-    context = {
-        'topics' : Topic.objects.all(),
-        'form' : form,
-        'register_form' : register_form
-    }
-    return render(request, 'foro.html', context)
+    else:
+        return render(request, 'foro.html', {'topics': topics, 'form': form, 'register_form': register_form})
     
-def topic_threads(request, pk):
-    topic = get_object_or_404(Topic, pk=pk)
-    return render(request, 'threads.html', {'topic': topic})
+def topic_threads(request, n):
 
-def new_thread(request, pk):
-    topic = get_object_or_404(Topic, pk=pk)
-    user = Usuario.objects.first()  #cambiar por usuario logeado
+    topic = get_object_or_404(Topic, name=n)
+    tema =get_object_or_404(Topic, name=n)
+    pk = tema.pk
+    print(tema.pk)
+    print(tema.name)
+    threads1 =  Thread.objects.filter(topic = pk)
+    for Thread1 in threads1:
+     print(Thread1.name)
+    context = {
+        'topic' : get_object_or_404(Topic, name=n),
+        'threads' : Thread.objects.filter(topic = pk),
+    }
+    queryset =request.GET.get("buscar") 
+    print(queryset)
+    if queryset:
+        threads1=Thread.objects.filter(
+         Q(name__icontains = queryset) &
+          Q(topic = pk)
+         )
+        context = {
+        'topic' : get_object_or_404(Topic, name=n),
+        'threads' : threads1,
+        }
+        return render(request, 'threads.html',context)
+    else:
+        
+        return render(request, 'threads.html',context)
+
+@login_required
+def new_thread(request, n):
+    topic = get_object_or_404(Topic, name=n)
+    #user = Usuario.objects.first()  #cambiar por usuario logeado
 
     if request.method == 'POST':
         form = NewThreadForm(request.POST)
         if form.is_valid():
             thread = form.save(commit=False)
             thread.topic = topic
-            thread.user = user
+            thread.user = request.user
             thread.save()
             post = Post.objects.create(
                 body=form.cleaned_data.get('body'),
                 thread=thread,
-                user=user
+                user=thread.user
             )
-            return redirect('topic_threads', pk=topic.pk)
+            return redirect('topic_threads', n=topic.name)
     else:
         form = NewThreadForm() 
     return render(request, 'new_thread.html', {'topic': topic, 'form': form})
+
+@login_required
+def new_post(request, nTo, nTh):
+    thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
+    #user = Usuario.objects.first()  #cambiar por usuario logeado
+
+    if request.method == 'POST':
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.thread = thread
+            post.user = request.user
+            post.save()
+            return redirect('thread_posts', nTo=thread.topic.name, nTh=thread.name)
+    else:
+        form = NewPostForm() 
+    return render(request, 'new_post.html', {'thread': thread, 'form': form})
+
+def thread_posts(request, nTo, nTh):
+    thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
+    return render(request, 'posts.html', {'thread': thread})
 
 #account
 def register(request):

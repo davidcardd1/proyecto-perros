@@ -26,8 +26,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home', views.home, name='home'),
     path('foro', views.foro, name='foro'),
-    path('foro/<int:pk>/threads', views.topic_threads, name='topic_threads'),
-    path('foro/<int:pk>/threads/new', views.new_thread, name='new_thread'),
+    path('foro/<str:n>', views.topic_threads, name='topic_threads'),
+    path('foro/<str:n>/new_thread', views.new_thread, name='new_thread'),
+    path('foro/<str:nTo>/<str:nTh>', views.thread_posts, name='thread_posts'),
+    path('foro/<str:nTo>/<str:nTh>/new_post', views.new_post, name='new_post'),
     #users
     path('login/', views.login_view, name='login'),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
