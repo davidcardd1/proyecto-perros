@@ -1,66 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
+{% block head %}
+<title>Foro</title>
+{% endblock %}
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>FORO</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="{% static 'css/scrolling-nav.css' %}">
-  
-  <link rel="shortcut icon" href="{% static 'img/logos5.png' %}">
-
-  <!-- Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-</head>
-
-<body id="page-top">
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="/home">Proyecto4patas</a>
-      <div class="navbar">
-        <ul class="navbar-nav">
-          {% if user.is_authenticated %}
-          <li>
-            <div class="dropdown">
-              {% if user.profile.profile_pic %}
-                <img src="{{ user.profile.profile_pic.url }}" id="profileImageIcon">
-              {% endif %}
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ user }}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/profile"><i class="material-icons">account_circle</i>My profile</a>
-                <a class="dropdown-item" href="/profile/edit"><i class="material-icons">settings_applications</i>Edit profile</a>
-                <a class="dropdown-item" href="/logout"><i class="material-icons">exit_to_app</i>Logout</a>
-              </div>
-            </div>
-          </li>
-          {% else %}
-          <li>
-              <a href="login.html" class="nav-link" data-toggle="modal" data-target="#loginModal" id="loginLink">Ingresar</a>
-            </li>
-          <li>
-            <a href="register.html" class="nav-link" data-toggle="modal" data-target="#registerModal" id="registerLink">Registrarse</a>
-          </li>
-          {% endif%}
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
+{% block body %}
   <header class="bg-primary text-white">
     <div class="container text-center">
       <img src="{% static 'img/logos5.png' %}" id="logoForo"/>
@@ -113,8 +58,8 @@
           <div class="container" id="viewLogin">
             <form method="POST">
               {% csrf_token %}
-              <p><label for="id_username">User:</label><input id="id_username" type="text" name="username" maxlength="100" required></p>
-              <p><label for="id_password">Password: </label><input id="id_password" type="password" name="password" maxlength="100" required></p>
+              <p><label for="id_username">User</label><br><input id="id_username" type="text" name="username" maxlength="100" required></p>
+              <p><label for="id_password">Password</label><br><input id="id_password" type="password" name="password" maxlength="100" required></p>
               {% for error in field.errors %}
                 <p class="help is-danger">{{ error }}</p>
               {% endfor %}
@@ -147,8 +92,8 @@
               {% endfor %}
               {% for field in register_form %}
                 <div class="field">
-                <label for="{{ field.id_for_label }}" class="label">{{ field.html_name }}</label>
-                {{ field }}
+                <p><label for="{{ field.id_for_label }}" class="label">{{ field.html_name }}</label><br>
+                {{ field }}</p>
                 {% for error in field.errors %}
                   <p class="help is-danger">{{ error }}</p>
                 {% endfor %}
@@ -164,30 +109,4 @@
       </div>
     </div>
   </div> 
-  
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Proyecto4patas 2019</p>
-      <p class="m-3 text-center text-white"> David Cárdenas, Lisset Cuevas y Daniel Morales</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-
-  <!-- Custom JavaScript for this theme -->
-  <script src="{% static 'js/scrolling-nav.js' %}"></script>
-  <script src="{% static 'js/foro.js' %}"></script>
-
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-  </body>
-
-</html>
+{% endblock %}  
