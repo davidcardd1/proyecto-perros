@@ -55,17 +55,17 @@ def topic_threads(request, n):
     topic = get_object_or_404(Topic, name=n)
     tema =get_object_or_404(Topic, name=n)
     pk = tema.pk
-    print(tema.pk)
-    print(tema.name)
+    #print(tema.pk)
+    #print(tema.name)
     threads1 =  Thread.objects.filter(topic = pk)
-    for Thread1 in threads1:
-     print(Thread1.name)
+    #for Thread1 in threads1:
+     #print(Thread1.name)
     context = {
         'topic' : get_object_or_404(Topic, name=n),
         'threads' : Thread.objects.filter(topic = pk),
     }
     queryset =request.GET.get("buscar") 
-    print(queryset)
+    #print(queryset)
     if queryset:
         threads1=Thread.objects.filter(
          Q(name__icontains = queryset) &
@@ -83,7 +83,8 @@ def topic_threads(request, n):
 @login_required
 def new_thread(request, n):
     topic = get_object_or_404(Topic, name=n)
-    user = Usuario.objects.first() #cambiar por usuario logeado
+    #user = Usuario.objects.first() #cambiar por usuario logeado
+    user = Usuario.objects.get(user=request.user)
 
     if request.method == 'POST':
         form = NewThreadForm(request.POST)
@@ -105,8 +106,7 @@ def new_thread(request, n):
 @login_required
 def new_post(request, nTo, nTh):
     thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
-    user = Usuario.objects.first() #cambiar por usuario logeado 
-
+    user = Usuario.objects.get(user=request.user)
     if request.method == 'POST':
         form = NewPostForm(request.POST)
         if form.is_valid():

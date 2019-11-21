@@ -25,6 +25,7 @@ urlpatterns = [
     #general & forum
     path('admin/', admin.site.urls),
     path('home', views.home, name='home'),
+    path('', views.home, name='home'),
     path('foro', views.foro, name='foro'),
     path('foro/<str:n>', views.topic_threads, name='topic_threads'),
     path('foro/<str:n>/new_thread', views.new_thread, name='new_thread'),

@@ -46,7 +46,6 @@ class Thread(models.Model):
     def __str__(self):
         return self.name
 
-
 class Post(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, null=False, default='0', related_name='posts')
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE,  related_name='+', null=True)
