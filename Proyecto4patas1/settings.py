@@ -136,5 +136,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+LOGIN_URL = '/foro'
 LOGIN_REDIRECT_URL = '/foro'
 LOGOUT_REDIRECT_URL = '/foro'

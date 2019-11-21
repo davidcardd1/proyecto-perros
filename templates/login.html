@@ -1,6 +1,7 @@
 <div class="container" id="viewLogin">
   <form method="POST">
     {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
     <p><label for="id_username">User</label><br>
     <input id="id_username" type="text" name="username" maxlength="100" required></p>
     <p><label for="id_password">Password</label><br>
