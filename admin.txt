@@ -1,3 +1,0 @@
-username: admin
-pw: admin123
-email: divadedca@hotmail.com
