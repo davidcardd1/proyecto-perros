@@ -44,10 +44,10 @@ class ProfileForm(UserChangeForm):
 class NewThreadForm(forms.ModelForm):
     body = forms.CharField(
         widget=forms.Textarea(
-            attrs={'rows': 5, 'placeholder': 'Escribe el contenido'}
+            attrs={'rows': 5, 'placeholder': 'What are you thinking about?...'}
         ), 
         max_length=5000,
-        help_text='Máximo 5000 caracteres'
+        help_text='Max 5000 chars'
         )
 
     class Meta:

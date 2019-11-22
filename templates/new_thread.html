@@ -16,6 +16,7 @@
             {% csrf_token %}
             {% include 'includes/form.html' %}
             <button type="submit" class="btn btn-success">Post</button>
+            <a class="btn btn-danger" href="{% url 'topic_threads' topic.name %}">Cancel</a>
         </form>
     </div>
 </section>
