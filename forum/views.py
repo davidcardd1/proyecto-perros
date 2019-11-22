@@ -7,8 +7,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Topic, Thread, Usuario, Post
 from .forms import RegistrationForm, EditProfileForm,ProfileForm, NewThreadForm,  NewThreadForm, NewPostForm
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth import login,authenticate, update_session_auth_hash
+from django.utils import timezone
+from django.utils.decorators import method_decorator
 
 #forum
 def home(request):
@@ -135,6 +137,25 @@ def login_view(request,*args, **kwargs):
     return render(request = request,
                     template_name = "login.html",
                     context={"form":form})
+
+@method_decorator(login_required, name='dispatch')
+class PostUpdateView(UpdateView):
+    model = Post
+    fields = ('body', )
+    template_name = 'edit_post.html'
+    pk_url_kwarg = 'post_pk'
+    context_object_name = 'post'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=Usuario.objects.get(user=self.request.user))
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.user = Usuario.objects.get(user=self.request.user)
+        post.updated_at = timezone.now()
+        post.save()
+        return redirect('thread_posts', nTo=post.thread.topic.name, nTh=post.thread.name)
 
 def profile(request, pk=None):
     if pk:

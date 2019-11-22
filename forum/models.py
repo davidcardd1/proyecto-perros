@@ -36,7 +36,7 @@ class Topic(models.Model):
     def get_posts_count(self):
         return Post.objects.filter(thread__topic=self).count()
     def get_last_post(self):
-        return Post.objects.filter(thread__topic=self).order_by('-created').first()
+        return Post.objects.filter(thread__topic=self).order_by('-updated').first()
 
 
 class Thread(models.Model):

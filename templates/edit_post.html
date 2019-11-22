@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}Edit post{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+        <ol class="breadcrumb my-4">
+            <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'topic_threads' post.thread.topic.name %}">{{ post.thread.topic.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'thread_posts' post.thread.topic.name post.thread.name %}">{{ post.thread.name }}</a></li>
+            <li class="breadcrumb-item active">Edit post</li>
+        </ol>
+        <form method="post" class="mb-4" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form.html' %}
+            <button type="submit" class="btn btn-success">Save changes</button>
+            <a href="{% url 'thread_posts' post.thread.topic.name post.thread.name %}" class="btn btn-danger" role="button">Cancel</a>
+        </form>
+    </div>
+</section>
+{% endblock %}
