@@ -6,19 +6,26 @@
 {% endblock %}
 
 {% block body %}
-  <header class="bg-primary text-white">
-    <div class="container text-center">
-      <img src="{% static 'img/logos5.png' %}" id="logoForo"/>
-      <h1>Adoption saves lifes</h1> 
-      <h2>FORUM</h2> 
+  <header class="bg-primary text-white headerForo">
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-auto">
+              <img src="{% static 'img/logos5.png' %}" id="logoForo"/>
+            </div>
+            <div class="col-md-auto text-center">
+              <h3>Adoption saves lifes</h3> 
+              <h4>FORUM</h4> 
+            </div>
     </div>
   </header>
 
   <section id="temas">
   <form method="GET">
-    <div class="container" id="busqueda">
-      <input class="form-control" type="text" placeholder="Search topic" name="buscar">
-      <button type="submit" class="btn btn-success"> Search </button>  
+    <div class="container input-group mb-3" id="busqueda">
+      <input type="text" class="form-control" placeholder="Search topic" name="buscar">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-success"> Search </button>
+      </div>
     </div>
   </form>
 

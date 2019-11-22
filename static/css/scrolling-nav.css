@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-scrolling-nav/blob/master/LICENSE)
  */
 header {
-  padding: 156px 0 100px;
+  padding: 100px 0 100px;
 }
 
 section {
@@ -30,10 +30,6 @@ section {
 
 #temas{
   padding-top: 50px;
-}
-
-#logoForo{
-  width: 10%;
 }
 
 .bg-img {
@@ -73,4 +69,18 @@ section {
 
 #btn-editProfile{
   margin-top: 20px;
+}
+
+.headerForo{
+  height: 40px;
+}
+
+.bg-img {
+    background:  url("\primera.jpg");
+    background-image:  url("primera.jpg");
+    background-size: cover;
+}
+
+#logoForo{
+  width: 80px;
 }
