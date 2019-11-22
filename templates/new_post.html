@@ -3,7 +3,18 @@
 {% load static %}
 
 {% block head %}
-    <title>Nuevo post</title> 
+    <title>New post</title> 
+{% endblock %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
+{% endblock %}
+
+{% block javascript %}
+  <script src="{% static 'js/simplemde.min.js' %}"></script>
+  <script>
+    var simplemde = new SimpleMDE();
+  </script>
 {% endblock %}
 
 {% block body %}

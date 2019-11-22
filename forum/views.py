@@ -95,6 +95,9 @@ def new_post(request, nTo, nTh):
             post.thread = thread
             post.user = user
             post.save()
+
+            thread.last_updated = timezone.now()
+            thread.save()
             return redirect('thread_posts', nTo=thread.topic.name, nTh=thread.name)
     else:
         form = NewPostForm() 
@@ -102,7 +105,13 @@ def new_post(request, nTo, nTh):
 
 def thread_posts(request, nTo, nTh):
     thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
-    thread.no_views += 1
+    
+    session_key = 'viewed_thread_{}'.format(thread.pk)  # <-- here
+    if not request.session.get(session_key, False):
+        thread.no_views += 1
+        thread.save()
+        request.session[session_key] = True
+    
     thread.save()
     return render(request, 'posts.html', {'thread': thread})
 

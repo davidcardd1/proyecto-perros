@@ -23,6 +23,7 @@
     
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% block stylesheet %}{% endblock %}
 
   </head>
 
@@ -74,7 +75,7 @@
     <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Proyecto4patas 2019</p>
-        <p class="m-3 text-center text-white"> David Cárdenas, Lisset Cuevas y Daniel Morales</p>
+        <p class="m-3 text-center text-white"> David Cárdenas, Lisset Cuevas & Daniel Morales</p>
       </div>
       <!-- /.container -->
     </footer>
@@ -89,7 +90,21 @@
     <!-- Custom JavaScript for this theme -->
     <script src="{% static 'js/scrolling-nav.js' %}"></script>
     <script src="{% static 'js/foro.js' %}"></script>
+
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
   
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+    <!--
+      <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    -->
+    
+    {% block javascript %}
+    
+    {% endblock %}
   </body>
 </html>

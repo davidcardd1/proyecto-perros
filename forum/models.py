@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.html import mark_safe
+from markdown import markdown
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.utils.text import Truncator
@@ -66,3 +68,5 @@ class Post(models.Model):
     def __str__(self):
         pm = Truncator(self.body)
         return pm.chars(30)
+    def get_body_markdown(self):
+        return mark_safe(markdown(self.body, safe_mode='escape'))
