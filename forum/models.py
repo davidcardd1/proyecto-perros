@@ -26,7 +26,6 @@ class Topic(models.Model):
     created = models.DateTimeField('Created', auto_now_add=True)
     updated = models.DateTimeField('Updated', null=True)
     user = models.ForeignKey(Usuario, related_name='topicUser',on_delete=models.CASCADE)
-    no_views = models.IntegerField('Views count', blank=True, default=0)
     subscribers = models.ManyToManyField(Usuario, blank=True, related_name='topics')
     post_count = models.IntegerField('Post count', blank=True, default=0)
 
