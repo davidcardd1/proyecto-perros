@@ -32,6 +32,11 @@
         <a class="navbar-brand js-scroll-trigger" href="/home">Proyecto4patas</a>
         <div class="navbar">
           <ul class="navbar-nav">
+            {% if request.get_full_path != "/foro" %}
+            <li>
+              <a href="/foro" class="nav-link">Forum</a>
+            </li>
+            {% endif %}
             {% if user.is_authenticated %}
             <li>
               <div class="dropdown">
@@ -50,10 +55,10 @@
             </li>
             {% else %}
             <li>
-                <a href="login.html" class="nav-link" data-toggle="modal" data-target="#loginModal" id="loginLink">Ingresar</a>
-              </li>
+                <a href="/login" class="nav-link">Login</a>
+            </li>
             <li>
-              <a href="register.html" class="nav-link" data-toggle="modal" data-target="#registerModal" id="registerLink">Registrarse</a>
+              <a href="/register" class="nav-link">Singup</a>
             </li>
             {% endif%}
           </ul>
