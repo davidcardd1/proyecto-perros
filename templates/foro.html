@@ -9,16 +9,16 @@
   <header class="bg-primary text-white">
     <div class="container text-center">
       <img src="{% static 'img/logos5.png' %}" id="logoForo"/>
-      <h1>Adoptar es salvar</h1> 
-      <h2>FORO</h2> 
+      <h1>Adopting is saving</h1> 
+      <h2>FORUM</h2> 
     </div>
   </header>
 
   <section id="temas">
   <form method="GET">
     <div class="container" id="busqueda">
-      <input class="form-control" type="text" placeholder="Buscar topic" name="buscar">
-      <button type="submit" class="btn btn-success"> Buscar </button>  
+      <input class="form-control" type="text" placeholder="Search topic" name="buscar">
+      <button type="submit" class="btn btn-success"> Search </button>  
     </div>
   </form>
 
@@ -27,9 +27,9 @@
       <table class="table table-bordered table-hover">
         <thead class="thead-dark">
           <tr>
-            <th scope="col" width="50%">Nombre</th>
-            <th scope="col" width="15%">Estadisticas</th>
-            <th scope="col" width="35%">Última modificación</th>
+            <th scope="col" width="50%">Name</th>
+            <th scope="col" width="15%">Stats</th>
+            <th scope="col" width="35%">Last update</th>
          </tr>
         </thead>
         <tbody>
@@ -66,70 +66,4 @@
       </table>    
     </div>
   </section>
-
- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ingresar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="includedLogin">
-          <div class="container" id="viewLogin">
-            <form method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="next" value="{{ next }}">
-              <p><label for="id_username">User</label><br><input id="id_username" type="text" name="username" maxlength="100" required class='form-control'></p>
-              <p><label for="id_password">Password</label><br><input id="id_password" type="password" name="password" maxlength="100" required class='form-control'></p>
-              {% for error in field.errors %}
-                <p class="help is-danger">{{ error }}</p>
-              {% endfor %}
-              <button type="submit" class="btn btn-primary">Entrar</button>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <p>¿Aun no tienes cuenta? <a href="" data-toggle="modal" data-target="#registerModal" id="registerLink" data-dismiss="modal"> Registrate</a> </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Registrarse</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="includedRegister">
-          <div class="container">
-            <form method="POST">
-              {% csrf_token %}
-              {% for non_field_error in register_form.non_field_errors %}
-              <p class="help is-danger">{{ non_field_error }}</p>
-              {% endfor %}
-              {% for field in register_form %}
-              <div class="field form-group">
-                <p><label for="{{ field.id_for_label }}">{{ field.html_name }}</label><br>
-                {{ field }}</p>
-                {% for error in field.errors %}
-                <p class="help is-danger">{{ error }}</p>
-                {% endfor %}
-              </div>
-              {% endfor %}
-              <button type="submit" class="btn btn-primary">Registrarse</button>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <p>¿Ya tienes una cuenta? <a href=""  data-toggle="modal" data-target="#loginModal" id="loginLink" data-dismiss="modal"> Ingresa</a></p>
-        </div>
-      </div>
-    </div>
-  </div> 
 {% endblock %}  

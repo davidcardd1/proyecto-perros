@@ -15,27 +15,6 @@ def home(request):
     return render(request, 'index.html')
 
 def foro(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        register_form = RegistrationForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('foro')
-
-            register_form.save()
-            username1 = register_form.cleaned_data.get('username')
-            password1 = register_form.cleaned_data.get('password1')
-            user1 = authenticate(username=username1, password=password1)
-            if user1 is not None:
-                login(request, user1)
-                return redirect('foro')
-
-    form = AuthenticationForm()
-    register_form = RegistrationForm()
     queryset =request.GET.get("buscar") 
     #print(queryset)
     topics = Topic.objects.all()
@@ -45,10 +24,10 @@ def foro(request):
             Q(description__icontains = queryset)
         ).distinct()
         
-        return render(request, 'foro.html', {'topics': topics, 'form': form, 'register_form': register_form})
+        return render(request, 'foro.html', {'topics': topics})
 
     else:
-        return render(request, 'foro.html', {'topics': topics, 'form': form, 'register_form': register_form})
+        return render(request, 'foro.html', {'topics': topics})
     
 def topic_threads(request, n):
 

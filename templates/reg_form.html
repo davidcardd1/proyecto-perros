@@ -1,20 +1,17 @@
-{% load widget_tweaks %}
-<div class="container">
-  <form method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}">
-    {% for non_field_error in form.non_field_errors %}
-      <p class="help is-danger">{{ non_field_error }}</p>
-    {% endfor %}
-    {% for field in form %}
-      <div class="field form-group">
-      <p><label for="{{ field.id_for_label }}" class="label">{{ field.html_name }}</label><br>
-      {{ field }}</p>
-      {% for error in field.errors %}
-        <p class="help is-danger">{{ error }}</p>
-      {% endfor %}
-      </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Registrarse</button>
-  </form>
-</div>
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Singup</title>
+{% endblock %}
+
+{% block body %}
+<section>
+  <div class="container">
+    <form method="POST">
+      {% csrf_token %}
+      {% include 'includes/form.html' %}
+      <button type="submit" class="btn btn-primary">Singup</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
