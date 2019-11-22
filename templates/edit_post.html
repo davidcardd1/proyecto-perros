@@ -3,19 +3,18 @@
 {% block head %}Edit post{% endblock %}
 
 {% block stylesheet %}
-  <link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 {% endblock %}
 
 {% block javascript %}
-  <script src="{% static 'js/simplemde.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
   <script>
     var simplemde = new SimpleMDE();
   </script>
 {% endblock %}
 
 {% block body %}
-<section>
-    <div class="container">
+    <div class="container thread">
         <ol class="breadcrumb my-4">
             <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
             <li class="breadcrumb-item"><a href="{% url 'topic_threads' post.thread.topic.name %}">{{ post.thread.topic.name }}</a></li>
@@ -29,5 +28,4 @@
             <a href="{% url 'thread_posts' post.thread.topic.name post.thread.name %}" class="btn btn-danger" role="button">Cancel</a>
         </form>
     </div>
-</section>
 {% endblock %}

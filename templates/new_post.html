@@ -7,31 +7,29 @@
 {% endblock %}
 
 {% block stylesheet %}
-  <link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 {% endblock %}
 
 {% block javascript %}
-  <script src="{% static 'js/simplemde.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
   <script>
     var simplemde = new SimpleMDE();
   </script>
 {% endblock %}
 
 {% block body %}
-<section>
-    <div class="container">
+    <div class="container thread">
         <ol class="breadcrumb my-4">
                 <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
                 <li class="breadcrumb-item"><a href="{% url 'topic_threads' thread.topic.name %}">{{ thread.topic.name }}</a></li>
                 <li class="breadcrumb-item"><a href="{% url 'thread_posts' thread.topic.name thread.name %}">{{ thread.name }}</a></li>
                 <li class="breadcrumb-item active">New post</li>
         </ol>
-        <form method="post" class="mb-4">
+        <form method="post" class="mb-4" novalidate>
             {% csrf_token %}
             {% include 'includes/form.html' %}
-            <button type="submit" class="btn btn-success">Post a reply</button>
+            <button type="submit button" class="btn btn-success">Post a reply</button>
             <a class="btn btn-danger" href="{% url 'thread_posts' thread.topic.name thread.name %}">Cancel</a>
         </form>
     </div>
-</section>
 {% endblock %}

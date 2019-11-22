@@ -63,7 +63,7 @@ class Post(models.Model):
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE,  related_name='+', null=True)
     created = models.DateTimeField('Created', auto_now_add=True)
     updated = models.DateTimeField('Updated', auto_now=True)
-    body = models.TextField('Message')
+    body = models.TextField('Message', max_length=5000)
     body_html = models.TextField('HTML version')
     def __str__(self):
         pm = Truncator(self.body)
