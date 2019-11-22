@@ -1,24 +1,17 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
+
 {% block head %}
-<title>Registro</title>
+<title>Singup</title>
 {% endblock %}
 
 {% block body %}
 <section>
   <div class="container">
-    <div class="row">
-
-      <div class="col px-5">
-        <h1>Registrate</h1><br>
-
-        <form method="POST">
-         {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-primary">Registrarse</button>
-        </form>
-      </div>
-
-    </div>
+    <form method="POST">
+      {% csrf_token %}
+      {% include 'includes/form.html' %}
+      <button type="submit" class="btn btn-primary">Singup</button>
+    </form>
   </div>
 </section>
 {% endblock %}

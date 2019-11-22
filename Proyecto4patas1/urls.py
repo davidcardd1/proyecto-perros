@@ -15,20 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from forum import views
+#from forum.views import register, profile,editProfile, changePassword
 from django.contrib.auth.views import LoginView, LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     #general & forum
     path('admin/', admin.site.urls),
     path('home', views.home, name='home'),
+    path('', views.home, name='home'),
     path('foro', views.foro, name='foro'),
-    path('foro/<int:pk>/threads', views.topic_threads, name='topic_threads'),
-    path('foro/<int:pk>/threads/new', views.new_thread, name='new_thread'),
+    path('foro/<str:n>', views.topic_threads, name='topic_threads'),
+    path('foro/<str:n>/new_thread', views.new_thread, name='new_thread'),
+    path('foro/<str:nTo>/<str:nTh>', views.thread_posts, name='thread_posts'),
+    path('foro/<str:nTo>/<str:nTh>/new_post', views.new_post, name='new_post'),
+    path('foro/<str:nTo>/<str:nTh>/<int:post_pk>/edit', views.PostUpdateView.as_view(template_name='edit_post.html'), name='edit_post'),
     #users
-    path('account/login/', LoginView.as_view(template_name='login.html'), name="login"),
-    path('account/logout/', LogoutView.as_view(template_name='logout.html'), name="logout"),
-    path('account/register/', views.register, name="register"),
-    path('account/profile/', views.profile, name="profile")
-]
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('register/', views.register, name='register'),
+    path('profile/', views.profile, name="profile"),
+    path('profile/edit', views.editProfile, name='editProfile'),
+    path('profile/changePassword', views.changePassword, name='changePassword')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
