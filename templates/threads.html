@@ -29,9 +29,9 @@
       <tr>
         <th th scope="col" width="40%">Topic</th>
         <th scope="col" width="15%">Starter</th>
-        <th scope="col" width="15%">Replies</th>
-        <th scope="col" width="15%">Views</th>
-        <th scope="col" width="15%">Last Update</th>
+        <th scope="col" width="10%">Replies</th>
+        <th scope="col" width="10%">Views</th>
+        <th scope="col" width="25%">Last Update</th>
       </tr>
     </thead>
     <tbody>
@@ -43,8 +43,10 @@
             <small class="text-muted d-block">{{ thread.body }}</small>
           </td>
           <td>{{ thread.user }}</td>
-          <td>0</td>
-          <td>0</td>
+          <td>
+            {{ thread.get_posts_count }}
+          </td>
+          <td>{{ thread.no_views }}</td>
           <td>{{ thread.updated }}</td>
         </tr>
       {% endfor %}

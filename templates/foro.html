@@ -39,9 +39,27 @@
               <a href="{% url 'topic_threads' topic.name %}">{{ topic.name }}</a>
               <small class="text-muted d-block">{{ topic.description }}</small>
             </td>
-            <td>Hilos: 0<br>Posts: 0
+            <td class="align-middle">
+              Hilos: {{ topic.threads.count }}<br>
+              Posts: {{ topic.get_posts_count }}
             </td>
-            <td>No hay posts</td>
+            <td class="align-middle">
+              {% with post=topic.get_last_post %}
+                {% if post %}
+                  <small>
+                      <a href="{% url 'thread_posts' topic.name post.thread.name %}">
+                        <b>{{ post.thread.name }}</b>
+                        <br>  
+                        {{ post.user }} - {{ post.created }}
+                        </a>
+                  </small>
+                {% else %}
+                  <small class="text-muted">
+                    <em>No hay posts</em>
+                  </small>
+                {% endif %}
+              {% endwith %}
+            </td>
             {% endfor %}
           </tr>
         </tbody>
