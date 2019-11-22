@@ -5,25 +5,24 @@
 {% endblock %}
 
 {% block body %}
-<section>
-  <div class="container">
+  <div class="container thread">
       <ol class="breadcrumb my-4">
         <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
         <li class="breadcrumb-item active">{{ topic.name }}</li>
       </ol>
-      <a href="{% url 'new_thread' topic.name %}" class="btn btn-primary">Crear nuevo thread</a>
+      <a href="{% url 'new_thread' topic.name %}" class="btn btn-primary btn-newThread">Create a thread</a>
   </div>
 
    <form method="GET">
-    <div class="container" id="busqueda">
-      <input class="form-control" type="text" placeholder="Buscar topic" name="buscar">
-      <button type="submit" class="btn btn-success"> Buscar </button>  
-    </div>
+    <div class="container input-group mb-3" id="busqueda">
+        <input type="text" class="form-control" placeholder="Search topic" name="buscar">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-success"> Search </button>
+        </div>
+      </div>
   </form>
-  
 
   <div class='container'>
-     </div>
   <table class="table container table-bordered table-hover">
     <thead class="thead-inverse thead-dark">
       <tr>
@@ -52,5 +51,5 @@
       {% endfor %}
     </tbody>
   </table>
-</section>
-{% endblock body %}
+  </div>
+{% endblock %}

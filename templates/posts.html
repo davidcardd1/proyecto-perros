@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
-{% block head %}{{ thread.name }}{% endblock %}
+{% block head %}
+  {{ thread.name }}
+{% endblock %}
 
 {% block body %}
-<section>
-    <div class="container">
+    <div class="container thread">
         <ol class="breadcrumb my-4">
             <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
             <li class="breadcrumb-item"><a href="{% url 'topic_threads' thread.topic.name %}">{{ thread.topic.name }}</a></li>
@@ -14,7 +14,7 @@
         </ol>
     </div>
     <div class="container mr-10 mb-3 text-right ">
-      <a href="{% url 'new_post' thread.topic.name thread.name %}" class="btn btn-primary" role="button">Responder al post</a>
+      <a href="{% url 'new_post' thread.topic.name thread.name %}" class="btn btn-primary" role="button">Reply the post</a>
     </div>
     <div class="card  bg-ligth border-ligth container mb-4">
       <div class="card-header">
