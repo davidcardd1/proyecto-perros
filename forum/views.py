@@ -100,6 +100,8 @@ def new_post(request, nTo, nTh):
 
 def thread_posts(request, nTo, nTh):
     thread = get_object_or_404(Thread, topic__name=nTo, name=nTh)
+    thread.no_views += 1
+    thread.save()
     return render(request, 'posts.html', {'thread': thread})
 
 #account

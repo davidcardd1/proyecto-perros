@@ -6,19 +6,26 @@
 {% endblock %}
 
 {% block body %}
-  <header class="bg-primary text-white">
-    <div class="container text-center">
-      <img src="{% static 'img/logos5.png' %}" id="logoForo"/>
-      <h1>Adopting is saving</h1> 
-      <h2>FORUM</h2> 
+  <header class="bg-primary text-white headerForo">
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-auto">
+              <img src="{% static 'img/logos5.png' %}" id="logoForo"/>
+            </div>
+            <div class="col-md-auto text-center">
+              <h3>Adopting is saving</h3> 
+              <h4>FORUM</h4> 
+            </div>
     </div>
   </header>
 
   <section id="temas">
   <form method="GET">
-    <div class="container" id="busqueda">
-      <input class="form-control" type="text" placeholder="Search topic" name="buscar">
-      <button type="submit" class="btn btn-success"> Search </button>  
+    <div class="container input-group mb-3" id="busqueda">
+      <input type="text" class="form-control" placeholder="Search topic" name="buscar">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-success"> Search </button>
+      </div>
     </div>
   </form>
 
@@ -28,7 +35,7 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col" width="50%">Name</th>
-            <th scope="col" width="15%">Statistics</th>
+            <th scope="col" width="15%">Stats</th>
             <th scope="col" width="35%">Last update</th>
          </tr>
         </thead>
@@ -39,9 +46,27 @@
               <a href="{% url 'topic_threads' topic.name %}">{{ topic.name }}</a>
               <small class="text-muted d-block">{{ topic.description }}</small>
             </td>
-            <td>Threads: 0<br>Posts: 0
+            <td class="align-middle">
+              Hilos: {{ topic.threads.count }}<br>
+              Posts: {{ topic.get_posts_count }}
             </td>
-            <td>No posts</td>
+            <td class="align-middle">
+              {% with post=topic.get_last_post %}
+                {% if post %}
+                  <small>
+                      <a href="{% url 'thread_posts' topic.name post.thread.name %}">
+                        <b>{{ post.thread.name }}</b>
+                        <br>  
+                        {{ post.user }} - {{ post.created }}
+                        </a>
+                  </small>
+                {% else %}
+                  <small class="text-muted">
+                    <em>No hay posts</em>
+                  </small>
+                {% endif %}
+              {% endwith %}
+            </td>
             {% endfor %}
           </tr>
         </tbody>
