@@ -9,7 +9,7 @@
   <header class="bg-primary text-white">
     <div class="container text-center">
       <img src="{% static 'img/logos5.png' %}" id="logoForo"/>
-      <h1>Adopting is saving</h1> 
+      <h1>Adoption saves lifes</h1> 
       <h2>FORUM</h2> 
     </div>
   </header>
@@ -40,7 +40,7 @@
               <small class="text-muted d-block">{{ topic.description }}</small>
             </td>
             <td class="align-middle">
-              Hilos: {{ topic.threads.count }}<br>
+              Threads: {{ topic.threads.count }}<br>
               Posts: {{ topic.get_posts_count }}
             </td>
             <td class="align-middle">
@@ -55,7 +55,7 @@
                   </small>
                 {% else %}
                   <small class="text-muted">
-                    <em>No hay posts</em>
+                    <em>There's no posts yet...</em>
                   </small>
                 {% endif %}
               {% endwith %}

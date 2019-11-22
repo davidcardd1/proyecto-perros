@@ -11,13 +11,13 @@
         <li class="breadcrumb-item"><a href="{% url 'foro' %}">Topics</a></li>
         <li class="breadcrumb-item active">{{ topic.name }}</li>
       </ol>
-      <a href="{% url 'new_thread' topic.name %}" class="btn btn-primary">Crear nuevo thread</a>
+      <a href="{% url 'new_thread' topic.name %}" class="btn btn-primary">Create new thread</a>
   </div>
 
    <form method="GET">
     <div class="container" id="busqueda">
-      <input class="form-control" type="text" placeholder="Buscar topic" name="buscar">
-      <button type="submit" class="btn btn-success"> Buscar </button>  
+      <input class="form-control" type="text" placeholder="Search thread" name="buscar">
+      <button type="submit" class="btn btn-success"> Search</button>  
     </div>
   </form>
   
