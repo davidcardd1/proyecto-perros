@@ -1,8 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-forum\migrations\__pycache__/
-forum\__pycache__/
-Proyecto4patas1\__pycache__/
+*.pyc
 *.py[cod]
 *$py.class
 .vscode/
