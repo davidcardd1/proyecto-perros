@@ -43,7 +43,7 @@ def topic_threads(request, n):
      #print(Thread1.name)
     context = {
         'topic' : get_object_or_404(Topic, name=n),
-        'threads' : Thread.objects.filter(topic = pk),
+        'threads' : Thread.objects.filter(topic = pk).order_by('-updated'),
     }
     queryset =request.GET.get("buscar") 
     #print(queryset)
@@ -51,7 +51,7 @@ def topic_threads(request, n):
         threads1=Thread.objects.filter(
          Q(name__icontains = queryset) &
           Q(topic = pk)
-         )
+         ).order_by('-updated')
         context = {
         'topic' : get_object_or_404(Topic, name=n),
         'threads' : threads1,
