@@ -45,7 +45,7 @@ def topic_threads(request, n):
         'topic' : get_object_or_404(Topic, name=n),
         'threads' : Thread.objects.filter(topic = pk).order_by('-updated'),
     }
-    queryset =request.GET.get("buscar") 
+    queryset =request.GET.get("buscar")
     #print(queryset)
     if queryset:
         threads1=Thread.objects.filter(
