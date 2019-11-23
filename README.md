@@ -1,6 +1,8 @@
 # proyecto-perros
 Página para la adopción de perros y foro.
-Proyecto para la clase de Ingeniería Web.
+Proyecto para la clase de Ingeniería Web. Es una página creada con:
+* frontend: **js, css, html5**
+* backend: **django**
 Creador por: David Cárdenas, Lisset Cuevas y Daniel Morales
 
 ## Instalación
