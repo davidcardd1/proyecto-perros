@@ -7,11 +7,10 @@ Creador por: David Cárdenas, Lisset Cuevas y Daniel Morales
   Se puede obtener el proyecto con el comando en git bash:
 
 ```bash
-git clone git@github.com:sibtc/django-beginners-guide.git
+git clone https://github.com/davidcardd1/proyecto-perros.git
 ```
-  o descargandolo mediante el zip de la primer página
-
-  Es necesario tener django y un ambierte virtual corriendo.
+  o descargandolo mediante el zip de la primer página.
+  Es necesario tener django y un ambiente virtual corriendo.
   
   Instalar requirements:
 
