@@ -3,4 +3,7 @@
     background-image:  url("primera.jpg");
     background-size: cover;
 }
+.bg-header {
+    background-color: rgb(28, 29, 63);
+}
 

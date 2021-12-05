@@ -12,7 +12,7 @@
           {% if user.profile.profile_pic %}
           <img class="profileImage" src="{{ user.profile.profile_pic.url }}">
           {% else %}
-          <img class="default_profileImage" src="/Proyecto4patas1/media/profile_image/default_profileImage.jpg">
+          <img class="default_profileImage" src="/ProyectoFinal/media/profile_image/default_profileImage.jpg">
           {% endif %}
           </p>
           <button type="button" class="btn btn-info btn-profile" onclick="window.location.href = '/profile/edit';">Edit profile</button><br>
@@ -24,7 +24,7 @@
           <p><i>About me</i><br>{{ user.profile.bio }}</p>
           <p><b>Email:</b> {{ user.email }}</p> 
           <p><b>Date joined:</b> {{ user.date_joined }}</p>
-          <p><b>Last login:</b> {{ user.last_login }}</p>
+          <p><b>Last log in:</b> {{ user.last_login }}</p>
           
         </div>
         

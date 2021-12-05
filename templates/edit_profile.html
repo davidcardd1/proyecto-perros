@@ -17,7 +17,7 @@
             {% if user.profile.profile_pic %}
             <img class="profileImage" src="{{ user.profile.profile_pic.url }}" width="160px">
             {% else %}
-            <img src="/Proyecto4patas1/media/profile_image/default_profileImage.jpg" width="170px">
+            <img src="/ProyectoFinal/media/profile_image/default_profileImage.jpg" width="170px">
             {% endif %}
             <br>
             <br><label for="id_profile_pic" >Change profile picture</label>
@@ -32,7 +32,7 @@
         </div>
         <div class="col">
             <p><label for="id_bio">About me</label><br> 
-                <textarea name="bio" class="form-control" value="{{ user.profile.bio }}" cols="50" rows="3" maxlength="2500" id="id_bio" placeholder="Describe yourself"></textarea></p>
+                <textarea name="bio" class="form-control" value="{{ user.profile.bio }}" cols="50" rows="3" maxlength="2500" id="id_bio"></textarea></p>
             <p><label for="id_email">Email address</label><br> 
             <input type="email" class="form-control" name="email" value="{{ user.email }}" maxlength="254" id="id_email"></p>
             <p><label for="id_first_name">First name</label><br> 

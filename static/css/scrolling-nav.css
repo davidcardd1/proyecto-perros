@@ -5,6 +5,7 @@
  */
 header {
   padding: 100px 0 100px;
+  background-color: rgb(28, 29, 63);
 }
 
 section {
@@ -91,4 +92,8 @@ section {
 
 .btn-newThread{
   margin-bottom: 20px;
+}
+
+.bg-header {
+  background-color: rgb(28, 29, 63) !important;
 }
